@@ -1,0 +1,19 @@
+[
+  {
+    "pwsid": "010106001",
+    "violation_id": "0106001022950102018",
+    "facility_id": "1",
+    "population_served_count": 26445,
+    "pws_activity_code": "A",
+    "primary_source_code": "GU",
+    "pws_type_code": "CWS",
+    "violation_code": "02",
+    "violation_category_code": "MCL",
+    "is_health_based_ind": "Y",
+    "contaminant_code": "2950",
+    "compliance_status_code": "R",
+    "compl_per_begin_date": "2018-10-01 00:00:00",
+    "compl_per_end_date": "2018-12-31 00:00:00",
+    "rtc_date": "2019-02-12 00:00:00"
+  }
+]
