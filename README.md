@@ -12,7 +12,7 @@
 
 The EPA has collected 30+ years of drinking-water data on nearly every US water system — violations, contaminants, enforcement actions. Almost none of it is readable by the people drinking the water. Annual Consumer Confidence Reports run 14+ pages of regulatory jargon. Roughly 50 million Americans are served by systems with recent violations, and most have no idea.
 
-And water that's perfectly legal for humans can still kill your goldfish overnight — chloramine doesn't gas off like chlorine does. Nobody tells you that either.
+And water that's perfectly legal for humans can still kill your goldfish overnight - chloramine doesn't gas off like chlorine does. Nobody tells you that either.
 
 ## What TapCheck does
 
@@ -86,9 +86,9 @@ VERCEL=1 CACHE_DIR=/tmp/tapcheck-cache npm run build
 The entire codebase was written in a single long-running **Codex CLI session** with **GPT-5.6** (session ID submitted via /feedback). GPT-5.6 also powers the product itself at runtime. Highlights of where Codex did the heavy lifting:
 
 - **Reverse-engineered the EPA API by probing it.** Envirofacts sometimes returns XML regardless of the `/JSON` path segment, with formats that differ per table. Codex curled live endpoints, captured real responses as test fixtures, and built the parser around observed reality instead of the docs.
-- **Discovered the data gap that became the architecture.** `ZIP_CODE_SERVED` coverage is partial — both initial test ZIPs returned empty. Codex validated the finding and built the geocoding fallback chain (Zippopotam.us → Census reverse-geocoder → CITY_SERVED/COUNTY_SERVED), including vowel-normalized city matching because EPA drops vowels in place names ("SARATOGA SPRNGS").
+- **Discovered the data gap that became the architecture.** `ZIP_CODE_SERVED` coverage is partial - both initial test ZIPs returned empty. Codex validated the finding and built the geocoding fallback chain (Zippopotam.us → Census reverse-geocoder → CITY_SERVED/COUNTY_SERVED), including vowel-normalized city matching because EPA drops vowels in place names ("SARATOGA SPRNGS").
 - **Made the pipeline production-hostile-data-proof.** When live verification hit an EPA 500 on one system, Codex made the cache retain non-success responses and treat unparseable tables as empty — one flaky endpoint can't kill a report. It also narrowed county fan-out (Hudson County alone has 188 systems) to active community water systems.
-- **Designed the grounded-citation schema.** The enum-constrained `citationViolationId` approach — hallucination prevention in the schema layer rather than the prompt — came out of the Codex session implementing OpenAI's structured-outputs pattern.
+- **Designed the grounded-citation schema.** The enum-constrained `citationViolationId` approach - hallucination prevention in the schema layer rather than the prompt — came out of the Codex session implementing OpenAI's structured-outputs pattern.
 - **Self-corrected continuously.** Caught `create-next-app` defaulting to Next 16 and pinned 15 per spec; diagnosed and fixed its own lint failures; reviewed its own generated OG images and fixed a text-wrap issue before committing; survived a mid-task crash and reconciled state from git on resume.
 - **Shipped serverless safely.** Refactored all disk access behind a `CACHE_DIR`-aware cache module with fail-soft writes and committed seed data, verified under `VERCEL=1` before the first deploy attempt.
 
