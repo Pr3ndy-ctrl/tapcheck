@@ -17,10 +17,10 @@ And water that's perfectly legal for humans can still kill your goldfish overnig
 ## What TapCheck does
 
 - **Letter grade + plain-English summary** for your water system, built from live EPA SDWIS data
-- **Contaminant trading cards**: human-readable names (not raw EPA codes), what each one is, health effects, exceeded-limit badges — every claim carries a citation chip pointing to the underlying EPA violation record
+- **Contaminant trading cards**: human-readable names (not raw EPA codes), what each one is, health effects, exceeded-limit badges; every claim carries a citation chip pointing to the underlying EPA violation record
 - **Filter recommendation**: activated carbon vs reverse osmosis vs "you don't need one"
 - **Not just for humans 🐟🪴🐾**: fish, plant, and pet safety verdicts (chlorine vs chloramine reasoning for aquariums, fluoride-sensitive species for plants)
-- **Shareable holo cards**: every report has a dynamic 1200×630 OG image — paste a report link into iMessage/X/Slack and it unfurls into a graded card; download it as a PNG
+- **Shareable holo cards**: every report has a dynamic 1200×630 OG image we paste a report link into iMessage/X/Slack and it unfurls into a graded card; download it as a PNG
 - **Honest by design**: zero-violation systems get a deterministic "clean bill" (no AI call at all); where EPA data is missing a parameter, TapCheck says so instead of guessing
 
 ## Sample ZIPs to try
