@@ -95,7 +95,7 @@ The entire codebase was written in a single long-running **Codex CLI session** w
 ## Data sources & disclaimers
 
 - Violation and system data: [EPA Envirofacts SDWIS](https://www.epa.gov/enviro/sdwis-model). Geocoding: [Zippopotam.us](https://zippopotam.us), [US Census Geocoder](https://geocoding.geo.census.gov).
-- AI-generated summaries — every claim cites an EPA record. TapCheck is informational only and is **not medical advice**. For current test results, consult your utility's Consumer Confidence Report.
+- AI-generated summaries: every claim cites an EPA record. TapCheck is informational only and is **not medical advice**. For current test results, consult your utility's Consumer Confidence Report.
 
 ## What's next
 
