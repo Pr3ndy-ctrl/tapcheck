@@ -28,7 +28,8 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <head><script dangerouslySetInnerHTML={{ __html: "try { const theme = localStorage.getItem('tapcheck-theme'); const dark = theme ? theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; document.documentElement.classList.add(dark ? 'dark' : 'light'); } catch {}" }} /></head>
+      <body className="min-h-full flex flex-col transition-colors duration-200">
         <div className="flex-1">{children}</div>
         <SiteFooter />
       </body>
