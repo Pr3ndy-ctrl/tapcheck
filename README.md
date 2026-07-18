@@ -103,4 +103,4 @@ Email alerts when new violations hit your system, historical trend charts, an in
 
 ---
 
-*Built during OpenAI Build Week, July 2026 — by Dwain Prendergast.*
+*Built during OpenAI Build Week, July 2026 by Dwain Prendergast.*
