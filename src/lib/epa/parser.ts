@@ -47,6 +47,6 @@ export function mapRows(table: EpaTable, rows: EpaRow[]): GeographicArea[] | Wat
   return rows.flatMap((row) => {
     const pwsid = stringAt(row, "pwsid"); if (!pwsid) return [];
     const status = stringAt(row, "compliance_status_code");
-    return [{ pwsid, contaminantCode: stringAt(row, "contaminant_code"), healthBased: flagAt(row, "is_health_based_ind"), compliancePeriod: { begins: stringAt(row, "compl_per_begin_date"), ends: stringAt(row, "compl_per_end_date") }, resolved: status === "R" || Boolean(stringAt(row, "rtc_date")), status }];
+    return [{ id: stringAt(row, "violation_id"), pwsid, contaminantCode: stringAt(row, "contaminant_code"), healthBased: flagAt(row, "is_health_based_ind"), compliancePeriod: { begins: stringAt(row, "compl_per_begin_date"), ends: stringAt(row, "compl_per_end_date") }, resolved: status === "R" || Boolean(stringAt(row, "rtc_date")), status }];
   });
 }
