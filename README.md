@@ -1,6 +1,6 @@
 # TapCheck 💧
 
-**Type your ZIP code. Find out what's actually in your tap water — in plain English.**
+**Type your ZIP code. Find out what's actually in your tap water - in plain English.**
 
 🔗 **Live app:** https://tapcheck-nine.vercel.app
 🎬 **Demo video:** [YouTube link ** TODO]
