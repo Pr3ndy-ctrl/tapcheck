@@ -10,7 +10,7 @@
 
 ## The problem
 
-The EPA has collected 30+ years of drinking-water data on nearly every US water system — violations, contaminants, enforcement actions. Almost none of it is readable by the people drinking the water. Annual Consumer Confidence Reports run 14+ pages of regulatory jargon. Roughly 50 million Americans are served by systems with recent violations, and most have no idea.
+The EPA has collected 30+ years of drinking-water data on nearly every US water system; violations, contaminants, enforcement actions. Almost none of it is readable by the people drinking the water. Annual Consumer Confidence Reports run 14+ pages of regulatory jargon. Roughly 50 million Americans are served by systems with recent violations, and most have no idea.
 
 And water that's perfectly legal for humans can still kill your goldfish overnight; chloramine doesn't gas off like chlorine does. Nobody tells you that either.
 
