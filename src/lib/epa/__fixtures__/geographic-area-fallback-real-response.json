@@ -1,0 +1,28 @@
+[
+  {
+    "pwsid": "FL6094713",
+    "primacy_agency_code": "FL",
+    "pws_activity_code": "I",
+    "pws_type_code": "CWS",
+    "state_served": "FL",
+    "city_served": "HUDSON"
+  },
+  {
+    "pwsid": "NJ0905001",
+    "primacy_agency_code": "NJ",
+    "pws_activity_code": "A",
+    "pws_type_code": "CWS",
+    "state_served": "NJ",
+    "city_served": "HOBOKEN CITY-0905",
+    "county_served": "Hudson"
+  },
+  {
+    "pwsid": "NY4500168",
+    "primacy_agency_code": "NY",
+    "pws_activity_code": "A",
+    "pws_type_code": "CWS",
+    "state_served": "NY",
+    "city_served": "SARATOGA SPRNGS (C)",
+    "county_served": "Saratoga"
+  }
+]

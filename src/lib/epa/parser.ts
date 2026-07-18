@@ -41,9 +41,9 @@ const flagAt = (row: EpaRow, key: string): boolean | null => { const value = str
 export function mapRows(table: "GEOGRAPHIC_AREA", rows: EpaRow[]): GeographicArea[];
 export function mapRows(table: "WATER_SYSTEM", rows: EpaRow[]): WaterSystem[];
 export function mapRows(table: "VIOLATION", rows: EpaRow[]): Violation[];
-export function mapRows(table: EpaTable, rows: EpaRow[]) {
-  if (table === "GEOGRAPHIC_AREA") return rows.flatMap((row) => { const pwsid = stringAt(row, "pwsid"); return pwsid ? [{ pwsid }] : []; });
-  if (table === "WATER_SYSTEM") return rows.flatMap((row) => { const pwsid = stringAt(row, "pwsid"); return pwsid ? [{ pwsid, name: stringAt(row, "pws_name"), populationServed: numberAt(row, "population_served_count"), sourceType: stringAt(row, "primary_source_code") }] : []; });
+export function mapRows(table: EpaTable, rows: EpaRow[]): GeographicArea[] | WaterSystem[] | Violation[] {
+  if (table === "GEOGRAPHIC_AREA") return rows.flatMap((row) => { const pwsid = stringAt(row, "pwsid"); return pwsid ? [{ pwsid, activityCode: stringAt(row, "pws_activity_code"), systemType: stringAt(row, "pws_type_code"), cityServed: stringAt(row, "city_served"), countyServed: stringAt(row, "county_served") }] : []; });
+  if (table === "WATER_SYSTEM") return rows.flatMap((row) => { const pwsid = stringAt(row, "pwsid"); return pwsid ? [{ pwsid, name: stringAt(row, "pws_name"), populationServed: numberAt(row, "population_served_count"), sourceType: stringAt(row, "primary_source_code"), activityCode: stringAt(row, "pws_activity_code"), systemType: stringAt(row, "pws_type_code") }] : []; });
   return rows.flatMap((row) => {
     const pwsid = stringAt(row, "pwsid"); if (!pwsid) return [];
     const status = stringAt(row, "compliance_status_code");
