@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import type { WaterSystemReport } from "@/lib/epa/types";
 import type { AiWaterReport } from "@/lib/report/types";
+import { contaminantLabel, getContaminant } from "@/lib/epa/contaminants";
 
 type SystemReport = WaterSystemReport & { aiReport: AiWaterReport };
 const gradeStyle: Record<AiWaterReport["grade"], string> = { A: "bg-teal-600", B: "bg-emerald-600", C: "bg-amber-500", D: "bg-red-500", F: "bg-red-700" };
@@ -23,7 +24,7 @@ export function ReportViewer({ zip, systems }: { zip: string; systems: SystemRep
         <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-700">{aiReport.summary}</p><p className="mt-3 text-sm leading-6 text-slate-500">{aiReport.gradeRationale}</p>
       </div>
       <div className="space-y-10 p-7 sm:p-10">
-        {isClean ? <CleanBill /> : <Contaminants report={aiReport} />}
+        {isClean ? <CleanBill /> : <Contaminants report={aiReport} violations={item.violations} />}
         <FilterCallout report={aiReport} />
         <NonHuman report={aiReport} />
       </div>
@@ -31,8 +32,15 @@ export function ReportViewer({ zip, systems }: { zip: string; systems: SystemRep
   </main>;
 }
 
-function Contaminants({ report }: { report: AiWaterReport }) {
-  return <section><div className="mb-5"><p className="text-sm font-semibold uppercase tracking-[0.15em] text-teal-700">What we found</p><h2 className="mt-1 text-2xl font-semibold tracking-tight text-slate-900">EPA-recorded contaminants</h2></div><div className="grid gap-4 md:grid-cols-2">{report.contaminants.map((item) => <article key={`${item.name}-${item.citationViolationId}`} className="rounded-2xl border border-slate-200 p-5"><div className="flex items-start justify-between gap-3"><h3 className="font-semibold text-slate-900">{item.name}</h3><span className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${item.exceededLimit ? "bg-red-100 text-red-700" : "bg-slate-100 text-slate-600"}`}>{item.exceededLimit ? "Limit exceeded" : "Reported violation"}</span></div><p className="mt-3 text-sm leading-6 text-slate-600">{item.whatItIs}</p><p className="mt-3 text-sm leading-6 text-slate-700"><span className="font-medium">Health effects: </span>{item.healthEffects}</p><span className="mt-4 inline-flex rounded-full bg-teal-50 px-2.5 py-1 text-xs font-medium text-teal-800">EPA violation #{item.citationViolationId}</span></article>)}</div></section>;
+function Contaminants({ report, violations }: { report: AiWaterReport; violations: WaterSystemReport["violations"] }) {
+  return <section><div className="mb-5"><p className="text-sm font-semibold uppercase tracking-[0.15em] text-teal-700">What we found</p><h2 className="mt-1 text-2xl font-semibold tracking-tight text-slate-900">EPA-recorded contaminants</h2></div><div className="grid gap-4 md:grid-cols-2">{report.contaminants.map((item) => { const violation = violations.find(({ id }) => id === item.citationViolationId); const code = violation?.contaminantCode ?? null; const label = contaminantLabel(code); const category = getContaminant(code)?.category; return <article key={`${item.name}-${item.citationViolationId}`} className="rounded-2xl border border-slate-200 p-5"><div className="flex items-start justify-between gap-3"><div><h3 className="font-semibold text-slate-900">{label}</h3><div className="mt-2 flex flex-wrap gap-2 text-xs"><span className="rounded-full bg-slate-100 px-2.5 py-1 font-medium text-slate-600">code {code ?? "—"}</span>{category && <span className="rounded-full bg-teal-50 px-2.5 py-1 font-medium text-teal-800">{category}</span>}<span className="text-slate-500">{violation ? humanizeDate(violation.compliancePeriod.begins, violation.resolved) : "Date unavailable"}</span></div></div><span className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${item.exceededLimit ? "bg-red-100 text-red-700" : "bg-slate-100 text-slate-600"}`}>{item.exceededLimit ? "Limit exceeded" : "Reported violation"}</span></div><p className="mt-3 text-sm leading-6 text-slate-600">{item.whatItIs}</p><p className="mt-3 text-sm leading-6 text-slate-700"><span className="font-medium">Health effects: </span>{item.healthEffects}</p><span className="mt-4 inline-flex rounded-full bg-teal-50 px-2.5 py-1 text-xs font-medium text-teal-800">EPA violation #{item.citationViolationId}</span></article>; })}</div></section>;
+}
+
+function humanizeDate(value: string | null, resolved: boolean | null): string {
+  if (!value) return resolved ? "Date unavailable · resolved" : "Date unavailable · unresolved";
+  const date = new Date(`${value.replace(" ", "T")}Z`);
+  const label = Number.isNaN(date.getTime()) ? value.slice(0, 10) : new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric", timeZone: "UTC" }).format(date);
+  return `${label} · ${resolved ? "resolved" : "unresolved"}`;
 }
 
 function CleanBill() { return <section className="rounded-2xl border border-emerald-100 bg-emerald-50 p-6"><p className="text-sm font-semibold uppercase tracking-[0.15em] text-emerald-700">A calm clean bill</p><h2 className="mt-1 text-2xl font-semibold text-emerald-950">No EPA violations were returned</h2><p className="mt-2 max-w-2xl leading-7 text-emerald-900/75">That&apos;s encouraging. It reflects the public violation records available for this system, not a guarantee that every water-quality measure has been tested.</p></section>; }
