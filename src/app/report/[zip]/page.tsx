@@ -1,10 +1,21 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Suspense } from "react";
 import { ReportViewer } from "@/components/report-viewer";
 import { getZipReport } from "@/lib/epa/client";
 import { generateWaterReport } from "@/lib/report/generate";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }: { params: Promise<{ zip: string }> }): Promise<Metadata> {
+  const { zip } = await params; const requestHeaders = await headers();
+  const origin = `${requestHeaders.get("x-forwarded-proto") ?? "http"}://${requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "localhost:3000"}`;
+  let title = `TapCheck water report · ${zip}`; let description = "A plain-English view of public drinking-water records.";
+  try { const source = await getZipReport(zip); const primary = source.waterSystems[0]; if (primary) { const report = await generateWaterReport(primary); title = `${report.grade} grade · ${primary.system.name ?? "Water system"} · TapCheck`; description = report.summary; } } catch { /* Keep a useful share fallback for unknown ZIPs. */ }
+  const image = new URL(`/api/og/${zip}`, origin).toString();
+  return { title, description, openGraph: { title, description, type: "website", images: [{ url: image, width: 1200, height: 630, alt: `TapCheck water report for ZIP ${zip}` }] }, twitter: { card: "summary_large_image", title, description, images: [image] } };
+}
 
 export default async function ReportPage({ params }: { params: Promise<{ zip: string }> }) {
   const { zip } = await params;

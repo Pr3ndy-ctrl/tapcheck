@@ -5,6 +5,7 @@ import { useState } from "react";
 import type { WaterSystemReport } from "@/lib/epa/types";
 import type { AiWaterReport } from "@/lib/report/types";
 import { contaminantLabel, getContaminant } from "@/lib/epa/contaminants";
+import { ShareReport } from "./share-report";
 
 type SystemReport = WaterSystemReport & { aiReport: AiWaterReport };
 const gradeStyle: Record<AiWaterReport["grade"], string> = { A: "bg-teal-600", B: "bg-emerald-600", C: "bg-amber-500", D: "bg-red-500", F: "bg-red-700" };
@@ -23,6 +24,7 @@ export function ReportViewer({ zip, systems }: { zip: string; systems: SystemRep
         <div className="flex flex-col gap-7 sm:flex-row sm:items-center"><div className={`grid size-32 shrink-0 place-items-center rounded-full text-7xl font-semibold tracking-tighter text-white shadow-lg ${gradeStyle[aiReport.grade]}`}>{aiReport.grade}</div><div><p className="text-sm font-semibold uppercase tracking-[0.15em] text-slate-500">TapCheck grade</p><h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">{system.name ?? system.pwsid}</h1><div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm text-slate-600"><span>{system.populationServed?.toLocaleString() ?? "Population unavailable"} people served</span><span>{system.sourceType ? sourceName[system.sourceType] ?? system.sourceType : "Source type unavailable"}</span></div></div></div>
         <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-700">{aiReport.summary}</p><p className="mt-3 text-sm leading-6 text-slate-500">{aiReport.gradeRationale}</p>
       </div>
+      <ShareReport zip={zip} />
       <div className="space-y-10 p-7 sm:p-10">
         {isClean ? <CleanBill /> : <Contaminants report={aiReport} violations={item.violations} />}
         <FilterCallout report={aiReport} />
