@@ -1,0 +1,1 @@
+{"url":"https://api.zippopotam.us/us/10001","fetchedAt":"2026-07-18T05:36:25.523Z","status":200,"body":"{\"country\": \"United States\", \"country abbreviation\": \"US\", \"post code\": \"10001\", \"places\": [{\"place name\": \"New York City\", \"longitude\": \"-73.9967\", \"latitude\": \"40.7484\", \"state\": \"New York\", \"state abbreviation\": \"NY\"}]}"}
