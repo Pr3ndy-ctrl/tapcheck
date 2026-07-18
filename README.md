@@ -3,7 +3,7 @@
 **Type your ZIP code. Find out what's actually in your tap water — in plain English.**
 
 🔗 **Live app:** https://tapcheck-nine.vercel.app
-🎬 **Demo video:** [YouTube link — TODO]
+🎬 **Demo video:** [YouTube link ** TODO]
 🏆 Built solo in 4 days for **OpenAI Build Week** (Apps for Your Life track), entirely with **Codex + GPT-5.6**.
 
 ---
@@ -12,7 +12,7 @@
 
 The EPA has collected 30+ years of drinking-water data on nearly every US water system — violations, contaminants, enforcement actions. Almost none of it is readable by the people drinking the water. Annual Consumer Confidence Reports run 14+ pages of regulatory jargon. Roughly 50 million Americans are served by systems with recent violations, and most have no idea.
 
-And water that's perfectly legal for humans can still kill your goldfish overnight - chloramine doesn't gas off like chlorine does. Nobody tells you that either.
+And water that's perfectly legal for humans can still kill your goldfish overnight; chloramine doesn't gas off like chlorine does. Nobody tells you that either.
 
 ## What TapCheck does
 
@@ -54,7 +54,7 @@ ZIP input
 
 Health-adjacent AI output has to be grounded. TapCheck enforces it structurally, not with prompt vibes:
 
-1. The JSON schema's `citationViolationId` field is an **enum of the actual violation IDs** present in the EPA input — the model *cannot* emit a citation that doesn't exist.
+1. The JSON schema's `citationViolationId` field is an **enum of the actual violation IDs** present in the EPA input; the model *cannot* emit a citation that doesn't exist.
 2. Zero violations → deterministic clean-bill report generated in code. **No API call is made**, so there is nothing to hallucinate.
 3. Missing parameters (e.g., hardness) produce explicit "data not supplied" statements, with pointers to the utility's own report.
 
